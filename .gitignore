@@ -22,6 +22,8 @@ dist-ssr
 
 # Vercel
 .vercel/
+functions/
+static/
 
 # Editor directories and files
 .vscode/*
