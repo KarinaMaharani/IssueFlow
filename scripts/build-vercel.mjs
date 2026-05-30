@@ -1,8 +1,9 @@
-import { spawn } from "node:child_process";
+import { spawnSync } from "node:child_process";
+import { resolve } from "node:path";
 
-const npmCmd = process.platform === "win32" ? "npm.cmd" : "npm";
+const viteCliPath = resolve("node_modules", "vite", "bin", "vite.js");
 
-const child = spawn(npmCmd, ["run", "build"], {
+const result = spawnSync(process.execPath, [viteCliPath, "build"], {
   stdio: "inherit",
   env: {
     ...process.env,
@@ -10,11 +11,9 @@ const child = spawn(npmCmd, ["run", "build"], {
   },
 });
 
-child.on("error", (error) => {
-  console.error("Failed to start Vercel build process:", error);
+if (result.error) {
+  console.error("Failed to start Vercel build process:", result.error);
   process.exit(1);
-});
+}
 
-child.on("exit", (code) => {
-  process.exit(code ?? 1);
-});
+process.exit(result.status ?? 1);
