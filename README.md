@@ -119,6 +119,32 @@ npm install
 npm run dev
 ```
 
+## Deploy to Vercel
+
+This project is now configured for Vercel deployment using a Vercel-specific Nitro build preset.
+
+### Option 1: Deploy with Vercel Dashboard (recommended)
+
+1. Push this repository to GitHub/GitLab/Bitbucket.
+2. Import the project in Vercel.
+3. Keep the default settings (Vercel will read `vercel.json` and use the configured build command).
+4. Click **Deploy**.
+
+### Option 2: Deploy with Vercel CLI
+
+```bash
+npm install
+npm i -g vercel
+vercel
+vercel --prod
+```
+
+### Notes
+
+- `vercel.json` runs `npm run build:vercel`.
+- `build:vercel` sets `NITRO_PRESET=vercel` automatically before building.
+- Local Vercel metadata is ignored via `.vercel/` in `.gitignore`.
+
 ## License and Credit
 
 No explicit open-source license file is currently included. If you reuse ideas, code, or structure from this repository, please provide visible credit to Karina Maharani and this project.
